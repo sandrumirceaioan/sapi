@@ -12,7 +12,7 @@ async function bootstrap() {
   app.setGlobalPrefix('/api');
   app.use(cookieParser());
   app.enableCors({
-    origin: "*",
+    origin: "https://secret-dashboard.herokuapp.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: false,
     optionsSuccessStatus: 204

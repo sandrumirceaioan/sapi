@@ -27,7 +27,7 @@ export class CronModule {
 
   @Cron('*/30 * * * * *')
   statisticsCron() {
-    console.log('getStatistics STARTED');
+    //console.log('getStatistics STARTED');
     this.startCron(this.cronService, 'getStatistics');
   }
 

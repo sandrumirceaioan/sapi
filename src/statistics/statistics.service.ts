@@ -16,8 +16,8 @@ export class StatisticsService {
         return this.StatisticsModel.findOne(query, projection, options).lean();
     }
 
-    async findAll(): Promise<Statistic[]> {
-        return this.StatisticsModel.find().exec();
+    async find(query: object, projection = null, options = {}): Promise<Statistic[]> {
+        return this.StatisticsModel.find(query, projection, options).lean();
     }
 
     async latest(): Promise<Statistic> {

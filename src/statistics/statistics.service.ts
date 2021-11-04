@@ -12,8 +12,8 @@ export class StatisticsService {
         return createdStatistic.save();
     }
 
-    async findOne(query: object): Promise<Statistic> {
-        return this.StatisticsModel.findOne(query).exec();
+    async findOne(query: object, projection = null, options = {}): Promise<Statistic> {
+        return this.StatisticsModel.findOne(query, projection, options).lean();
     }
 
     async findAll(): Promise<Statistic[]> {

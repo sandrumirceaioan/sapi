@@ -8,6 +8,7 @@ import { StatisticsModule } from './statistics/statistics.module';
 import { CronModule } from './cron/cron.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { UsersModule } from './users/users.module';
+import { RewardsModule } from './rewards/rewards.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     SecretModule,
     StatisticsModule,
+    RewardsModule,
     CronModule
   ],
   controllers: [AppController],

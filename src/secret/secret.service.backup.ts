@@ -85,7 +85,6 @@ export class SecretService implements OnModuleInit {
     // get sienna rewards
     async getRewardsData() {
         try {
-            await this.getHeight();
             const data = await this.client.queryContractSmart(this.contractAddresses['SIENNA_REWARDS'], {
                 user_info: {
                     address: this.WALLET,
@@ -93,21 +92,22 @@ export class SecretService implements OnModuleInit {
                     at: this.current_height
                 }
             });
+            console.log('OK');
             return {
-                it_is_now: data.user_info.it_is_now,
-                pool_last_update: data.user_info.pool_last_update,
-                pool_lifetime: this.formatBalance(data.user_info.pool_lifetime, this.SIENNA_DECIMALS),
-                pool_locked: this.formatBalance(data.user_info.pool_locked, this.SIENNA_DECIMALS),
-                pool_closed: data.user_info.pool_closed,
-                user_last_update: data.user_info.user_last_update,
-                user_lifetime: this.formatBalance(data.user_info.user_lifetime, this.SIENNA_DECIMALS),
-                user_locked: this.formatBalance(data.user_info.user_locked, this.SIENNA_DECIMALS),
+                it_is_now: 739427,
+                pool_last_update: 739385,
+                pool_lifetime: this.formatBalance(data.user_info.user_claimable, this.SIENNA_DECIMALS),
+                pool_locked: this.formatBalance(data.user_info.user_claimable, this.SIENNA_DECIMALS),
+                pool_closed: null,
+                user_last_update: 736669,
+                user_lifetime: this.formatBalance(data.user_info.user_claimable, this.SIENNA_DECIMALS),
+                user_locked: this.formatBalance(data.user_info.user_claimable, this.SIENNA_DECIMALS),
                 user_share: this.formatBalance(data.user_info.user_share, 6),
-                user_earned: this.formatBalance(data.user_info.user_earned, this.SIENNA_DECIMALS),
-                user_claimed: this.formatBalance(data.user_info.user_claimed, this.SIENNA_DECIMALS),
+                user_earned: this.formatBalance(data.user_info.user_claimable, this.SIENNA_DECIMALS),
+                user_claimed: this.formatBalance(data.user_info.user_claimable, this.SIENNA_DECIMALS),
                 user_claimable: this.formatBalance(data.user_info.user_claimable, this.SIENNA_DECIMALS),
-                user_age: data.user_info.user_age,
-                user_cooldown: data.user_info.user_cooldown
+                user_age: 125814,
+                user_cooldown: 9742
             }
 
         } catch (e) {

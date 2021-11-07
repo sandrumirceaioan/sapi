@@ -20,12 +20,31 @@ export class RewardsController {
         return await this.secretService.getRewardsData();
     }
 
-    // @UseGuards(AuthGuard('jwt'))
-    // @Get('/claim')
-    // async claimRewards() {
-    //     return await this.secretService.claimRewards();
-    // }
+    @UseGuards(AuthGuard('jwt'))
+    @Post('/claim')
+    async claimRewards(@Body() params) {
 
-    
+        let reward = JSON.parse(JSON.stringify(params));
+        reward['claim_result'] = {
+            success: null,
+            error: null
+        };
+
+        let result = await this.secretService.claimRewards();
+        if (result.success) {
+            if (result.claim) {
+                reward.claim_result.success = JSON.stringify(result.claim);
+            } else {
+                if (result.error) {
+                    reward.claim_result.error = JSON.stringify(result.error);
+                }
+            }
+        } else {
+            reward.claim_result.error = JSON.stringify(result.error);
+        }
+
+        let created = await this.rewardsService.create(reward);
+        return created;
+    }
 
 }

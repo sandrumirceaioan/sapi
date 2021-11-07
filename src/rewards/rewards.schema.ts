@@ -6,33 +6,57 @@ export type RewardsDocument = Rewards & Document;
 @Schema()
 export class Rewards {
     @Prop({ type: Number })
-    userAge;
+    it_is_now;
 
     @Prop({ type: Number })
-    totalClaimed;
+    pool_last_update;
 
     @Prop({ type: Number })
-    totalEarned;
+    pool_lifetime;
 
     @Prop({ type: Number })
-    userShare;
-    
-    @Prop({ type: Number })
-    userLifetime
+    pool_locked;
 
     @Prop({ type: Number })
-    userLastUpdate;
+    pool_closed
 
     @Prop({ type: Number })
-    poolLifetime;
+    user_last_update;
 
     @Prop({ type: Number })
-    poolLocked;
+    user_lifetime;
 
     @Prop({ type: Number })
-    poolLastUpdate;
+    user_locked;
 
-    @Prop({ type: Date })
+    @Prop({ type: Number })
+    user_share;
+
+    @Prop({ type: Number })
+    user_earned;
+
+    @Prop({ type: Number })
+    user_claimed;
+
+    @Prop({ type: Number })
+    user_claimable;
+
+    @Prop({ type: Number })
+    user_age;
+
+    @Prop({ type: Number })
+    user_cooldown;
+
+    @Prop({ type: Number })
+    sienna_balance;
+
+    @Prop(raw({
+        success: { type: String },
+        error: { type: String }
+    }))
+    claim_result;
+
+    @Prop({ type: Date, default: new Date().getTime() })
     date;
 }
 

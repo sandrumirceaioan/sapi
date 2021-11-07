@@ -26,5 +26,11 @@ export const errorMessagesConfig: { [messageCode: string]: IErrorMessages } = {
         errorMessage: 'Unauthorized.',
     },
 
+    'user:request:unauthorized': {
+        type: 'BadRequest',
+        httpStatus: HttpStatus.UNAUTHORIZED,
+        errorMessage: 'Unauthorized request.',
+    },
+
 };
 

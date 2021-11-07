@@ -93,6 +93,7 @@ export class SecretService implements OnModuleInit {
                     at: this.current_height
                 }
             });
+
             return {
                 it_is_now: data.user_info.it_is_now,
                 pool_last_update: data.user_info.pool_last_update,
@@ -107,7 +108,8 @@ export class SecretService implements OnModuleInit {
                 user_claimed: this.formatBalance(data.user_info.user_claimed, this.SIENNA_DECIMALS),
                 user_claimable: this.formatBalance(data.user_info.user_claimable, this.SIENNA_DECIMALS),
                 user_age: data.user_info.user_age,
-                user_cooldown: data.user_info.user_cooldown
+                user_cooldown: data.user_info.user_cooldown,
+                sienna_balance: await this.getBalance('SIENNA')
             }
 
         } catch (e) {
@@ -119,11 +121,18 @@ export class SecretService implements OnModuleInit {
     // claim sienna rewards
     async claimRewards() {
         try {
-            const claim = await this.client.execute(this.contractAddresses['SIENNA_REWARDS'], { claim: {} }, undefined, undefined, this.create_fee('120000', '450000'), 'c1dc8261059fee1de9f1873cd1359ccd7a6bc5623772661fa3d55332eb652084');
+            const claim = await this.client.execute(this.contractAddresses['SIENNA_REWARDS'], { claim: {} }, undefined, undefined, this.create_fee('120000', '450000'));
             console.log(claim);
-            console.log(JSON.stringify(claim));
+            return {
+                success: true,
+                claim: claim
+            }
         } catch (e) {
             console.log('transaction failed: ', e.toString());
+            return {
+                success: false,
+                error: e.toString()
+            }
         }
     }
 

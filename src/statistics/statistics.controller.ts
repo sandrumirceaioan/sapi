@@ -9,13 +9,13 @@ import * as _ from 'underscore';
 export class StatisticsController {
 
     constructor(
-        private statisticsService: StatisticsService
+        private statisticsService: StatisticsService,
     ) { }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('/latest')
     async getLatest() {
-        return await this.statisticsService.findOne({}, { prices: 1, assets: 1, balances: 1 }, { sort: { 'date': -1 } });
+        return await this.statisticsService.getLatest();
     }
 
     @UseGuards(AuthGuard('jwt'))
